@@ -1,0 +1,79 @@
+# @name loginAPI
+POST http://localhost:8081/api/v1/auth/signin 
+content-type: application/json
+
+{
+"usuario": "admin", "senha": "admin"
+}
+
+###
+@token = {{loginAPI.response.body.*}}
+
+###
+GET http://localhost:8081/api/v1/pacientes/
+Authorization: Bearer {{token}}
+###
+GET http://localhost:8081/api/v1/pacientes/1
+Authorization: Bearer {{token}}
+###
+GET http://localhost:8081/api/v1/pacientes/nome/zinha
+Authorization: Bearer {{token}}
+###
+GET http://localhost:8081/api/v1/pacientes/?nome=ze
+Authorization: Bearer {{token}}
+###
+
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "Zezinho",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-08-17T00:00:00"
+}
+
+###
+
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "id" : 1,
+    "nome": "Zezinho",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-08-17T00:00:00"
+}
+
+###
+
+POST http://localhost:8081/api/v1/pacientes
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "Mariazinha",
+    "sexo": "Feminino",
+    "dataNascimento": "2022-08-16T00:00:00"
+}
+
+
+###
+
+PUT http://localhost:8081/api/v1/pacientes/1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "nome": "Zezinho da Silva Sauro",
+    "sexo": "Masculino",
+    "dataNascimento": "2022-08-17T00:00:00"
+}
+
+###
+
+DELETE http://localhost:8081/api/v1/pacientes/33
+Authorization: Bearer {{token}}
+
+###
